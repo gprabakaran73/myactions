@@ -1,6 +1,8 @@
 name: Github Actions Example
 
 on:
+  commit_comment:
+    
   pull_request:
   push:
     branches: 
@@ -13,6 +15,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Commit Comment
+      uses: peter-evans/commit-comment@v1.3.2
     - uses: actions/checkout@v1
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
