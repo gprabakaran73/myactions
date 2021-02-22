@@ -1,29 +1,29 @@
-name: Github Actions Example
-
-on:
-  commit_comment:
-    
-  pull_request:
-  push:
-    branches: 
-      - master
-      - develop
+name: Lint source code
+on: push
 
 jobs:
-  test:
-    name: Running Units Tests
+  run:
+    name: Lint with ESLint
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v1
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - name: Install
-      run: echo install node!
-    - name: Test
-      run: echo run npm run!
-    - name: Commit Comment
-      uses: peter-evans/commit-comment@v1.3.2
+      - name: Checkout repo
+        uses: actions/checkout@v2
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Update source code
+        run: eslint "src/**" --fix
+
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v7
+        with:
+          author_name: Your Name
+          author_email: mail@example.com
+          message: 'Your commit message'
+          add: '*.js'
