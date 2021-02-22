@@ -24,7 +24,6 @@ jobs:
       run: echo install node!
     - name: Test
       run: echo run npm run!
-    - name: Create commit comment
-      uses: peter-evans/commit-comment@v1
-      with:
-        body: ${{ steps.get-comment-body.outputs.body }}
+    - name: Commit Comment
+      uses: peter-evans/commit-comment@v1.3.2
+
