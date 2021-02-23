@@ -26,10 +26,4 @@ jobs:
       - name: Send message to ms teams
         run: echo Update source code!
 
-      - name: Commit changes
-        uses: EndBug/add-and-commit@v7
-        with:
-          author_name: Your Name
-          author_email: mail@example.com
-          message: 'Your commit message'
-          add: '*.js'
+
